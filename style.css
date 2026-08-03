@@ -1,0 +1,1035 @@
+:root {
+  --blue-transition: #4bb4df;
+  --blue-light: #1594d6;
+  --blue-main: #0867bb;
+  --blue-dark: #06438f;
+  --blue-deep: #032865;
+
+  --yellow: #ffc619;
+  --pink: #ec268f;
+
+  --white: #ffffff;
+
+  --text-soft: rgba(255, 255, 255, 0.86);
+  --text-muted: rgba(255, 255, 255, 0.72);
+}
+
+/* RESET */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+
+  color: var(--white);
+  background: var(--blue-deep);
+
+  font-family:
+    Inter,
+    Montserrat,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =========================================================
+   PRIMEIRA SEÇÃO
+   ========================================================= */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto minmax(110px, 1fr);
+
+  width: 100%;
+  min-height: 100svh;
+
+  overflow: hidden;
+
+  background: var(--blue-transition);
+}
+
+/*
+  A imagem mantém sua proporção original.
+  Não usamos object-fit: cover porque isso cortaria partes do banner.
+*/
+
+.hero__banner {
+  grid-column: 1;
+  grid-row: 1;
+
+  display: block;
+  justify-self: center;
+
+  width: 100%;
+  height: auto;
+
+  max-width: 720px;
+
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/*
+  Esta região é totalmente separada da imagem.
+
+  Portanto, o botão nunca ficará em cima:
+  - do número;
+  - do slogan;
+  - da fotografia.
+*/
+
+.hero__cta {
+  grid-column: 1;
+  grid-row: 2;
+
+  display: grid;
+  place-items: center;
+
+  min-height: 110px;
+
+  padding: 22px 20px 34px;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--blue-transition) 0%,
+      #45adde 55%,
+      #3ea7d9 100%
+    );
+}
+
+/* BOTÃO PARA DESCER */
+
+.scroll-indicator {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 164px;
+
+  padding: 11px 21px 7px;
+
+  color: var(--white);
+  background: rgba(3, 75, 149, 0.2);
+
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  border-radius: 999px;
+
+  box-shadow:
+    0 13px 30px rgba(1, 61, 124, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  cursor: pointer;
+
+  opacity: 1;
+  visibility: visible;
+
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease,
+    transform 0.4s ease,
+    background-color 0.25s ease;
+}
+
+.scroll-indicator:hover {
+  background: rgba(3, 75, 149, 0.38);
+
+  transform: translateY(-2px);
+}
+
+.scroll-indicator:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 5px;
+}
+
+.scroll-indicator.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateY(18px);
+}
+
+.scroll-indicator__label {
+  font-size: 0.74rem;
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.scroll-indicator__icon {
+  width: 28px;
+  height: 28px;
+
+  margin-top: 1px;
+
+  animation: arrowMovement 1.7s ease-in-out infinite;
+}
+
+@keyframes arrowMovement {
+  0%,
+  100% {
+    transform: translateY(-2px);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* =========================================================
+   SEÇÃO DAS REDES SOCIAIS
+   ========================================================= */
+
+.social-section {
+  position: relative;
+  isolation: isolate;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  min-height: 100svh;
+
+  margin-top: -1px;
+
+  padding:
+    clamp(84px, 13svh, 125px)
+    20px
+    clamp(60px, 9svh, 90px);
+
+  overflow: hidden;
+
+  /*
+    A primeira cor é igual à cor final da seção anterior.
+    Isso elimina a linha e a mudança brusca entre as telas.
+  */
+
+  background:
+    linear-gradient(
+      180deg,
+      #3ea7d9 0%,
+      var(--blue-light) 18%,
+      var(--blue-main) 43%,
+      var(--blue-dark) 70%,
+      var(--blue-deep) 100%
+    );
+}
+
+/* Forma rosa mais discreta */
+
+.social-section::before {
+  content: "";
+
+  position: absolute;
+  z-index: -2;
+
+  top: 12%;
+  right: -145px;
+
+  width: 280px;
+  height: 280px;
+
+  border-radius: 50%;
+
+  opacity: 0.42;
+
+  background:
+    radial-gradient(
+      circle at 35% 35%,
+      #ff67ba 0%,
+      var(--pink) 58%,
+      #bd126c 100%
+    );
+
+  filter: blur(1px);
+}
+
+/* Forma amarela mais discreta */
+
+.social-section::after {
+  content: "";
+
+  position: absolute;
+  z-index: -2;
+
+  bottom: -125px;
+  left: -125px;
+
+  width: 240px;
+  height: 240px;
+
+  border-radius: 50%;
+
+  opacity: 0.32;
+
+  background:
+    radial-gradient(
+      circle at 65% 35%,
+      #ffe771 0%,
+      var(--yellow) 58%,
+      #e99b00 100%
+    );
+
+  filter: blur(1px);
+}
+
+/* Textura discreta */
+
+.social-shell {
+  position: relative;
+  z-index: 2;
+
+  width: min(100%, 760px);
+
+  text-align: center;
+}
+
+.social-shell::before {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  top: -90px;
+  left: 50%;
+
+  width: min(780px, 130vw);
+  height: 610px;
+
+  opacity: 0.16;
+
+  transform: translateX(-50%);
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.7) 0 1px,
+      transparent 1.4px
+    );
+
+  background-size: 17px 17px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent,
+      black 20%,
+      black 70%,
+      transparent
+    );
+}
+
+/* TEXTOS */
+
+.social-kicker {
+  margin: 0 0 13px;
+
+  color: var(--yellow);
+
+  font-size: 0.78rem;
+  font-weight: 900;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.social-title {
+  max-width: 650px;
+
+  margin: 0 auto;
+
+  color: var(--white);
+
+  font-size: clamp(2.1rem, 7vw, 4rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+
+  text-wrap: balance;
+
+  text-shadow: 0 6px 24px rgba(0, 31, 85, 0.25);
+}
+
+.social-description {
+  max-width: 590px;
+
+  margin:
+    20px
+    auto
+    38px;
+
+  color: var(--text-soft);
+
+  font-size: clamp(1rem, 3vw, 1.12rem);
+  font-weight: 500;
+  line-height: 1.65;
+
+  text-wrap: balance;
+
+  text-shadow: 0 3px 14px rgba(0, 31, 85, 0.2);
+}
+
+/* =========================================================
+   BOTÕES MINIMALISTAS
+   ========================================================= */
+
+.social-links {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  gap: 12px;
+
+  width: min(100%, 430px);
+
+  margin: 0 auto;
+}
+
+.social-link {
+  position: relative;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+
+  min-height: 76px;
+
+  padding: 12px 15px;
+
+  overflow: hidden;
+
+  color: var(--white);
+  text-align: left;
+
+  background: rgba(255, 255, 255, 0.105);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+
+  box-shadow:
+    0 16px 35px rgba(0, 30, 88, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.16);
+
+  border-color: rgba(255, 255, 255, 0.4);
+
+  box-shadow:
+    0 20px 44px rgba(0, 30, 88, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+
+  transform: translateY(-3px);
+}
+
+.social-link:active {
+  transform: scale(0.985);
+}
+
+.social-link:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 5px;
+}
+
+/* ÍCONES */
+
+.social-link__icon {
+  display: grid;
+  place-items: center;
+
+  width: 46px;
+  height: 46px;
+
+  margin-right: 13px;
+
+  color: var(--white);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.social-link--instagram .social-link__icon {
+  background:
+    linear-gradient(
+      135deg,
+      #7346dd 0%,
+      #d13b9e 46%,
+      #ef535c 73%,
+      #f7a03b 100%
+    );
+}
+
+.social-link--facebook .social-link__icon {
+  background:
+    linear-gradient(
+      145deg,
+      #3188f5 0%,
+      #1369d8 55%,
+      #0751ab 100%
+    );
+}
+
+.social-link__icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+/* TEXTOS DOS BOTÕES */
+
+.social-link__content {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.social-link__content strong {
+  color: var(--white);
+
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.social-link__content small {
+  margin-top: 5px;
+
+  overflow: hidden;
+
+  color: rgba(255, 255, 255, 0.84);
+
+  font-size: 0.86rem;
+  font-weight: 600;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.social-link__arrow {
+  width: 21px;
+  height: 21px;
+
+  margin-left: 12px;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  transition: transform 0.25s ease;
+}
+
+.social-link:hover .social-link__arrow {
+  transform: translate(3px, -3px);
+}
+
+/* =========================================================
+   VOLTAR AO TOPO
+   ========================================================= */
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  margin-top: 34px;
+  padding: 9px 14px;
+
+  color: rgba(255, 255, 255, 0.8);
+  background: transparent;
+
+  border: 1px solid transparent;
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.back-to-top:hover {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.09);
+
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.back-to-top:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
+}
+
+.back-to-top svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* =========================================================
+   COMPUTADORES
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr);
+
+    grid-template-rows: 100svh;
+
+    background:
+      linear-gradient(
+        180deg,
+        #0b7bc5 0%,
+        #166eb6 55%,
+        var(--blue-transition) 100%
+      );
+  }
+
+  .hero__banner {
+    grid-column: 2;
+    grid-row: 1;
+
+    width: auto;
+    height: 100svh;
+
+    max-width: none;
+    max-height: 100svh;
+  }
+
+  /*
+    No computador, o botão fica na coluna lateral direita,
+    e não em cima do banner.
+  */
+
+  .hero__cta {
+    grid-column: 3;
+    grid-row: 1;
+
+    align-self: end;
+    justify-self: center;
+
+    min-height: 0;
+
+    padding:
+      0
+      24px
+      clamp(35px, 7vh, 74px);
+
+    background: transparent;
+  }
+
+  .social-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    width: min(100%, 720px);
+  }
+
+  .social-link {
+    min-height: 82px;
+  }
+}
+
+/* CELULARES PEQUENOS */
+
+@media (max-width: 390px) {
+  .social-section {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .social-description {
+    font-size: 0.98rem;
+  }
+
+  .social-link {
+    padding-right: 13px;
+    padding-left: 13px;
+  }
+
+  .social-link__icon {
+    width: 43px;
+    height: 43px;
+
+    margin-right: 11px;
+  }
+
+  .social-link__content small {
+    font-size: 0.82rem;
+  }
+}
+
+/* TELAS MUITO BAIXAS */
+
+@media (max-height: 680px) and (max-width: 1023px) {
+  .hero {
+    grid-template-rows: auto minmax(90px, 1fr);
+  }
+
+  .hero__cta {
+    min-height: 90px;
+
+    padding-top: 15px;
+    padding-bottom: 20px;
+  }
+
+  .scroll-indicator {
+    padding-top: 8px;
+    padding-bottom: 5px;
+  }
+}
+
+/* ACESSIBILIDADE */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* =========================================================
+   DESFOQUE DIRETO DO FINAL DA IMAGEM — CELULAR E TABLET
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  :root {
+    --shirt-blue: #46adde;
+  }
+
+  .hero {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 100svh;
+
+    overflow: hidden;
+
+    background: var(--shirt-blue);
+  }
+
+  /*
+    Novo contêiner da imagem.
+
+    Ele permite duplicar apenas o final da própria fotografia
+    e estendê-lo para a área abaixo.
+  */
+
+  .hero__visual {
+    position: relative;
+
+    flex: 0 0 auto;
+
+    width: 100%;
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    overflow: visible;
+  }
+
+  .hero__banner {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    max-width: none;
+  }
+
+  /*
+    Desativa os efeitos antigos aplicados na área do botão.
+  */
+
+  /*
+  Pequena cópia desfocada do final da própria imagem.
+  A transição agora ocupa poucos pixels.
+*/
+
+.hero__visual::before {
+  content: "";
+
+  position: absolute;
+  z-index: 3;
+
+  left: -3%;
+  bottom: -34px;
+
+  width: 106%;
+  height: 66px;
+
+  pointer-events: none;
+
+  background-image: url("./assets/banner_web.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center bottom;
+
+  /*
+    Mais desfoque e menos intensidade.
+    Isso reduz a marca escura do cabelo
+    e deixa a entrada da transição mais discreta.
+  */
+
+  filter:
+    blur(17px)
+    saturate(0.96);
+
+  opacity: 0.58;
+
+  /*
+    Removemos os recortes triangulares.
+    Agora a borda será criada somente pelo desfoque
+    e pela máscara gradual.
+  */
+
+  clip-path: none;
+
+  /*
+    A cópia aparece muito lentamente,
+    mistura-se na região central e desaparece
+    antes de criar outra divisão perceptível.
+  */
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.12) 20%,
+      rgba(0, 0, 0, 0.42) 42%,
+      rgba(0, 0, 0, 0.48) 58%,
+      rgba(0, 0, 0, 0.2) 78%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.12) 20%,
+      rgba(0, 0, 0, 0.42) 42%,
+      rgba(0, 0, 0, 0.48) 58%,
+      rgba(0, 0, 0, 0.2) 78%,
+      transparent 100%
+    );
+
+  transform: scaleX(1.045);
+  transform-origin: center;
+}
+
+/*
+  Névoa azul muito pequena atrás da cópia.
+
+  Ela serve somente para esconder o final do efeito,
+  sem ocupar uma grande parte da área do botão.
+*/
+
+.hero__visual::after {
+  content: "";
+
+  position: absolute;
+  z-index: 2;
+
+  left: -4%;
+  bottom: -54px;
+
+  width: 108%;
+  height: 82px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse 32% 48% at 15% 15%,
+      rgba(116, 204, 239, 0.55),
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 38% 52% at 48% 5%,
+      rgba(75, 177, 222, 0.58),
+      transparent 76%
+    ),
+    radial-gradient(
+      ellipse 34% 48% at 84% 17%,
+      rgba(45, 154, 207, 0.48),
+      transparent 74%
+    );
+
+  filter: blur(20px);
+
+  opacity: 0.32;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.7) 28%,
+      rgba(0, 0, 0, 0.32) 62%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.7) 28%,
+      rgba(0, 0, 0, 0.32) 62%,
+      transparent 100%
+    );
+}
+
+  /*
+    A área do botão não participa mais da transição.
+
+    Ela apenas fornece o espaço disponível da primeira tela.
+    Nenhum desfoque altera tamanho, padding ou posição.
+  */
+
+  .hero__cta {
+    position: relative;
+
+    display: grid;
+    place-items: center;
+
+    flex: 1 0 190px;
+
+    width: 100%;
+    min-height: 190px;
+
+    margin: 0;
+    padding: 20px 20px 30px;
+
+    overflow: visible;
+
+    background:
+      linear-gradient(
+        180deg,
+        var(--shirt-blue) 0%,
+        #43aadc 52%,
+        #3ea7d9 100%
+      );
+  }
+
+  /*
+    O botão fica acima de todas as camadas,
+    mas sua posição continua totalmente independente.
+  */
+
+  .scroll-indicator {
+    position: relative;
+    z-index: 10;
+
+    margin: 0;
+  }
+
+  /*
+    A segunda seção começa exatamente na mesma cor
+    em que a área anterior termina.
+  */
+
+  .social-section {
+    margin-top: -1px;
+
+    background:
+      linear-gradient(
+        180deg,
+        #3ea7d9 0%,
+        #35a2d7 13%,
+        #188bce 29%,
+        #0867bb 50%,
+        #06438f 74%,
+        #032865 100%
+      );
+  }
+}
+
+/* =========================================================
+   MANTÉM A VERSÃO DE COMPUTADOR
+   ========================================================= */
+
+@media (min-width: 1024px) {
+  .hero__visual {
+    grid-column: 2;
+    grid-row: 1;
+
+    width: auto;
+    height: 100svh;
+  }
+
+  .hero__banner {
+    width: auto;
+    height: 100svh;
+
+    max-width: none;
+    max-height: 100svh;
+  }
+
+  .hero__visual::before,
+  .hero__visual::after {
+    content: none;
+  }
+}
